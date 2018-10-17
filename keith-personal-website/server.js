@@ -15,11 +15,14 @@ const forceSSL = function() {
   }
 app.use(forceSSL());
 */
-app.use(express.static(__dirname + '/src'));
+app.use(express.static(__dirname, 'dist', {index: false}));
 
-app.get('/*', function(req,res) {
-    
-res.sendFile(path.join(__dirname+'/src/index.html'));
+
+app.get('', function(req, res) {
+    res.sendFile(path.join(__dirname, 'src', 'index.html'));
 });
 
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'src', 'index.html'));
+});
 app.listen(process.env.PORT || 8080);
